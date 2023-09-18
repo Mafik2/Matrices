@@ -7,10 +7,6 @@ public class Matrix implements IMatrix {
     public Matrix(double[][] rawArray) {
         this.rawArray = rawArray;
     }
-
-    /**
-     * TODO: Implement
-     */
     @Override
     public IMatrix times(IMatrix matrix) {
         return null;
@@ -21,20 +17,27 @@ public class Matrix implements IMatrix {
      */
     @Override
     public IMatrix times(Number scalar) {
-        return null;
+        double[][] result = new double[getRows()][getColumns()];
+
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                result[i][j] = scalar.doubleValue() * rawArray[i][j];
+            }
+        }
+        return new Matrix(result);
     }
 
-    /**
-     * TODO: Implement
-     */
     @Override
     public IMatrix add(IMatrix matrix) {
-        return null;
-    }
+        double[][] result = new double[getRows()][getColumns()];
 
-    /**
-     * TODO: Implement
-     */
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns(); j++) {
+                result[i][j] = rawArray[i][j] + matrix.get(i, j);
+            }
+        }
+        return new Matrix(result);
+    }
     @Override
     public IMatrix transpose() {
         return null;
