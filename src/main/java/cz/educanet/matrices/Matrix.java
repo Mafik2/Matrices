@@ -7,6 +7,7 @@ public class Matrix implements IMatrix {
     public Matrix(double[][] rawArray) {
         this.rawArray = rawArray;
     }
+
     @Override
     public IMatrix times(IMatrix matrix) {
         return null;
@@ -38,6 +39,7 @@ public class Matrix implements IMatrix {
         }
         return new Matrix(result);
     }
+
     @Override
     public IMatrix transpose() {
         return null;
@@ -56,12 +58,9 @@ public class Matrix implements IMatrix {
      */
     @Override
     public boolean isSquare() {
-        return false;
+        return getRows() == getColumns();
     }
 
-    /**
-     * TODO: Implement
-     */
     @Override
     public boolean isDiagonal() {
         return false;
@@ -90,7 +89,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public double get(int n, int m) {
-        if(n >= getRows() || n < 0 || m >= getColumns() || m < 0)
+        if (n >= getRows() || n < 0 || m >= getColumns() || m < 0)
             throw new IllegalArgumentException();
 
         return rawArray[n][m];
