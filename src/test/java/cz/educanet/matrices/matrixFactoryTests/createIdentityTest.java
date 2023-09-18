@@ -6,10 +6,9 @@ import cz.educanet.matrices.MatrixFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-class createDiagonalTest {
-
+class createIdentityTest {
     private IMatrixFactory matrixFactory = MatrixFactory.instance;
 
     @Test
@@ -18,14 +17,24 @@ class createDiagonalTest {
     }
 
     @Test
-    public void should_Succeed_When_ValidNumber() {
-        double[][] diagonal = new double[][]{{0, 1, 2, 3}, {4, 5, 5, 6}, {8, 9, 10, 10,}};
+    public void should_ThrowException_When_NegativeNumber() {
+        int negativeNumber = -1;
+        assertThrows(IllegalArgumentException.class, () -> {
+            matrixFactory.createIdentity(negativeNumber);
+        });
+    }
 
-        for (double[] diagonal2 : diagonal) {
-            IMatrix matrix = matrixFactory.createDiagonal(diagonal2);
-            diagonalChecker(matrix, diagonal2);
+    @Test
+    public void should_Succeed_When_ValidSize() {
+        int[] size = {1, 3, 6, 7, 2};
+
+        for (int size2 : size) {
+            IMatrix matrix = matrixFactory.createIdentity(size2);
+            Assertions.assertEquals(size2, matrix.getColumns());
+            Assertions.assertEquals(size2, matrix.getRows());
         }
     }
+
 
     public static void diagonalChecker(IMatrix m, double[] diagonal) {
         for (int i = 0; i < diagonal.length; i++) {

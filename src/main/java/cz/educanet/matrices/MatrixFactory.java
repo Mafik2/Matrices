@@ -10,9 +10,7 @@ public class MatrixFactory implements IMatrixFactory {
     public IMatrix create(double[][] data) {
         return new Matrix(data);
     }
-    /**
-     * TODO: Implement
-     */
+
     @Override
     public IMatrix createDiagonal(double[] diagonal) {
         if(diagonal.length == 0) throw new IllegalArgumentException();
@@ -22,10 +20,6 @@ public class MatrixFactory implements IMatrixFactory {
         }
         return new Matrix(data);
     }
-
-    /**
-     * TODO: Implement
-     */
     @Override
     public IMatrix createIdentity(int size) {
         if(size < 0) throw new IllegalArgumentException();
@@ -34,8 +28,6 @@ public class MatrixFactory implements IMatrixFactory {
             identity[i][i] = 1;
         }
         return new Matrix(identity);    }
-
-
 
     @Override
     public IMatrix createZero(int size) {
