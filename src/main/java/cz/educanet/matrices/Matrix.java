@@ -10,12 +10,25 @@ public class Matrix implements IMatrix {
 
     @Override
     public IMatrix times(IMatrix matrix) {
-        return null;
+        if (!isMultiplicationCompatible(matrix)) {
+            throw new IllegalArgumentException("!!!");
+        }
+        double[][] result = new double[getRows()][matrix.getColumns()];
+
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < matrix.getColumns(); j++) {
+                for (int k = 0; k < getColumns(); k++) {
+                    result[i][j] += get(i, k) * matrix.get(k, j);
+                }
+            }
+        }
+        return new Matrix(result);
     }
 
-    /**
-     * TODO: Implement
-     */
+    private boolean isMultiplicationCompatible(IMatrix matrix) {
+        return getColumns() == matrix.getRows();
+    }
+
     @Override
     public IMatrix times(Number scalar) {
         double[][] result = new double[getRows()][getColumns()];
@@ -42,12 +55,23 @@ public class Matrix implements IMatrix {
 
     @Override
     public IMatrix transpose() {
-        return null;
-    }
+        int numRows = getRows();
+        int numCols = getColumns();
 
-    /**
-     * TODO: Implement
-     */
+        if (numRows == 0 || numCols == 0) {
+            return new Matrix(new double[][]{});
+        }
+
+        double[][] transposed = new double[numCols][numRows];
+
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                transposed[j][i] = get(i, j);
+            }
+        }
+
+        return new Matrix(transposed);
+    }
     @Override
     public double determinant() {
         return 0;
