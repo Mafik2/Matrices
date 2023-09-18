@@ -63,12 +63,19 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isDiagonal() {
-        return false;
+        if (!isSquare()) {
+            return false;
+        }
+        for (int i = 0; i < rawArray.length; i++) {
+            for (int j = 0; j < rawArray[i].length; j++) {
+                if (i != j && rawArray[i][j] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
-    /**
-     * TODO: Implement
-     */
     @Override
     public Number getTrace() {
         return null;
